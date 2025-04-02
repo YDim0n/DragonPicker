@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,8 @@ public class DragonPicker : MonoBehaviour
 	public float energyShieldBottomY = -6f;
 	public float energyShieldRadius = 1.5f;
 	public List<GameObject> shieldList;
+
+	public TextMeshProUGUI liveLabel;
 
 	void Start()
 	{
@@ -21,10 +24,15 @@ public class DragonPicker : MonoBehaviour
 			shieldInstance.transform.localScale = new Vector3(1 * i, 1 * i, 1 * i);
 			shieldList.Add(shieldInstance);
 		}
+
+		GameObject liveInstance = GameObject.Find("Live");
+		liveLabel = liveInstance.GetComponent<TextMeshProUGUI>();
+		liveLabel.text = shieldList.Count.ToString();
 	}
 
 	void Update()
 	{
+		
 	}
 
 	public void DragonEggDestroyed()
@@ -41,6 +49,8 @@ public class DragonPicker : MonoBehaviour
 		GameObject shieldInstance = shieldList[shieldIndex];
 		shieldList.RemoveAt(shieldIndex);
 		Destroy(shieldInstance);
+
+		liveLabel.text = shieldList.Count.ToString();
 
 		if (shieldList.Count == 0)
 		{

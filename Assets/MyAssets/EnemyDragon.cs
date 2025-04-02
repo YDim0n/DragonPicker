@@ -34,16 +34,11 @@ public class EnemyDragon : MonoBehaviour
 
 	void Update()
 	{
-		Move2();
+		Move();
 		CheckDirectionChange();
 	}
 
 	void Move()
-	{
-		transform.position += Vector3.right * speed * Time.deltaTime;
-	}
-
-	void Move2()
 	{
 		float yOffset = Mathf.Sin(Time.time * speed) * 2f; // Shifting also by Y
 		transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, startY + yOffset, transform.position.z);
